@@ -20,7 +20,7 @@ export default async function middleware(req: NextRequest) {
   // console.log({ url });
 
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
-  const hostname = req.headers.get("host") || "app.durable.sh";
+  const hostname = req.headers.get("host") || "app.platformer.website";
 
   // console.log({ hostname });
 
@@ -35,7 +35,7 @@ export default async function middleware(req: NextRequest) {
       still need to add "*.platformize.vercel.app" as a wildcard domain on your Vercel dashboard. */
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
-      ? hostname.replace(`.app.durable.sh`, "")
+      ? hostname.replace(`.app.platformer.website`, "")
       : hostname.replace(`.localhost:3000`, "");
 
   // console.log({ currentHost });
@@ -60,7 +60,7 @@ export default async function middleware(req: NextRequest) {
   // rewrite root application to `/home` folder:
   // in other words, if the user requests the root URL, serve them the contents
   // of /pages/home/index.tsx
-  if (hostname === "localhost:3000" || hostname === "durable.sh") {
+  if (hostname === "localhost:3000" || hostname === "platformer.website") {
     return NextResponse.rewrite(new URL(`/home${path}`, req.url));
   }
 
