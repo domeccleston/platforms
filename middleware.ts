@@ -17,11 +17,17 @@ export const config = {
 export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
+  // console.log({ url });
+
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
-  const hostname = req.headers.get("host") || "app.platforms-gules.vercel.app";
+  const hostname = req.headers.get("host") || "app.durable.sh";
+
+  // console.log({ hostname });
 
   // Get the pathname of the request (e.g. /, /about, /blog/first-post)
   const path = url.pathname;
+
+  // console.log({ path });
 
   /*  You have to replace ".vercel.pub" with your own domain if you deploy this example under your domain.
       You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
@@ -29,11 +35,12 @@ export default async function middleware(req: NextRequest) {
       still need to add "*.platformize.vercel.app" as a wildcard domain on your Vercel dashboard. */
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
-      ? hostname
-          .replace(`.platforms-gules.vercel.app`, "")
+      ? hostname.replace(`.app.durable.sh`, "")
       : hostname.replace(`.localhost:3000`, "");
 
-  // rewrites for app pages
+  // console.log({ currentHost });
+  // rewrites for app pages:
+  // if user is already logged in and tries to access `/login` page, redirect to `/`
   if (currentHost == "app") {
     if (
       url.pathname === "/login" &&
@@ -44,12 +51,16 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.redirect(url);
     }
 
+    // if a user makes a request to 'app.name.tld', serve them the contents of
+    // /pages/app/index.tsx
     url.pathname = `/app${url.pathname}`;
     return NextResponse.rewrite(url);
   }
 
-  // rewrite root application to `/home` folder
-  if (hostname === "localhost:3000" || hostname === "platformize.vercel.app") {
+  // rewrite root application to `/home` folder:
+  // in other words, if the user requests the root URL, serve them the contents
+  // of /pages/home/index.tsx
+  if (hostname === "localhost:3000" || hostname === "durable.sh") {
     return NextResponse.rewrite(new URL(`/home${path}`, req.url));
   }
 
