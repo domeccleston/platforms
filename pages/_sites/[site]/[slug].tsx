@@ -52,6 +52,11 @@ export default function Post({
     stringifiedAdjacentPosts
   ) as Array<AdjacentPost>;
 
+
+  if (!data && !adjacentPosts) {
+    return <div>Error loading data.</div>
+  }
+
   const meta = {
     description: data.description,
     logo: "/logo.png",
