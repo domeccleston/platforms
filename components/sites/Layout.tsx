@@ -36,6 +36,9 @@ export default function Layout({ meta, children, subdomain }: LayoutProps) {
     }
   }, [closeModal]);
 
+
+  console.log('layout')
+
   return (
     <div>
       <Head>

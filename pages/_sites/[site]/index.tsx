@@ -35,6 +35,8 @@ export default function Index({ stringifiedData }: IndexProps) {
       : `https://${data.subdomain}.vercel.pub`,
   } as Meta;
 
+  console.log('index')
+
   return (
     <Layout meta={meta} subdomain={data.subdomain ?? undefined}>
       <div className="w-full mb-20">

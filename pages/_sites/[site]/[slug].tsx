@@ -60,6 +60,8 @@ export default function Post({
     title: data.title,
   } as Meta;
 
+  console.log('slug')
+
   return (
     <Layout meta={meta} subdomain={data.site?.subdomain ?? undefined}>
       <div className="flex flex-col justify-center items-center">

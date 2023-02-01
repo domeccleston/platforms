@@ -74,6 +74,8 @@ export default function AppIndex() {
     router.push(`/site/${data.siteId}`);
   }
 
+  console.log('app index')
+
   return (
     <Layout>
       <Modal showModal={showModal} setShowModal={setShowModal}>
