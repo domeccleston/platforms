@@ -220,6 +220,5 @@ export const getStaticProps: GetStaticProps<IndexProps, PathProps> = async ({
     props: {
       stringifiedData: JSON.stringify(data),
     },
-    revalidate: 3600,
   };
 };
