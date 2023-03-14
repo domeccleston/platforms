@@ -22,7 +22,7 @@ interface IndexProps {
 export default function Index({ stringifiedData }: IndexProps) {
   const router = useRouter();
   if (router.isFallback) return <Loader />;
-
+  console.log({ stringifiedData });
   let data = {} as _SiteData;
   try {
     data = JSON.parse(stringifiedData) as _SiteData;
