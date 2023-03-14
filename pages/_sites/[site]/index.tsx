@@ -23,11 +23,11 @@ export default function Index({ stringifiedData }: IndexProps) {
   const router = useRouter();
   if (router.isFallback) return <Loader />;
 
-  let data;
+  let data = {} as _SiteData;
   try {
-     data = JSON.parse(stringifiedData) as _SiteData;
+    data = JSON.parse(stringifiedData) as _SiteData;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   const meta = {
@@ -40,7 +40,7 @@ export default function Index({ stringifiedData }: IndexProps) {
       : `https://${data.subdomain}.vercel.pub`,
   } as Meta;
 
-  console.log('index')
+  console.log("index");
 
   return (
     <Layout meta={meta} subdomain={data.subdomain ?? undefined}>
