@@ -209,6 +209,12 @@ export const getStaticProps: GetStaticProps<IndexProps, PathProps> = async ({
 
   if (!data) return { notFound: true, revalidate: 10 };
 
+  try {
+    JSON.parse(data);
+  } catch (error) {
+    throw new Error("Invalid JSON data");
+  }
+
   return {
     props: {
       stringifiedData: JSON.stringify(data),
