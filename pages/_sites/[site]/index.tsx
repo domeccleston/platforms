@@ -210,7 +210,8 @@ export const getStaticProps: GetStaticProps<IndexProps, PathProps> = async ({
   if (!data) return { notFound: true, revalidate: 10 };
 
   try {
-    JSON.parse(JSON.stringify(data));
+    console.log("\n\n\n\n\n\nLOGGING DATA\n\n\n\n\n\n");
+    console.log(JSON.parse(JSON.stringify(data)));
   } catch (error) {
     throw new Error("Invalid JSON data");
   }
