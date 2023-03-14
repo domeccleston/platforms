@@ -65,6 +65,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   // rewrite everything else to `/_sites/[site] dynamic route
+  // e.g. app.platformer.website/home -> /_sites/app/home
   return NextResponse.rewrite(
     new URL(`/_sites/${currentHost}${path}`, req.url)
   );
