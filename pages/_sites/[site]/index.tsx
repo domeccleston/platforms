@@ -23,7 +23,12 @@ export default function Index({ stringifiedData }: IndexProps) {
   const router = useRouter();
   if (router.isFallback) return <Loader />;
 
-  const data = JSON.parse(stringifiedData) as _SiteData;
+  let data;
+  try {
+     data = JSON.parse(stringifiedData) as _SiteData;
+  } catch (error) {
+    console.log(error)
+  }
 
   const meta = {
     title: data.name,
